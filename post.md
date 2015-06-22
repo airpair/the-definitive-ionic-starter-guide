@@ -50,7 +50,7 @@ In the two examples above, the first is a visual card like you might see in many
 
 #### Ionic Services
 
-Services are programmatic user interface elements that are declared in JavaScript. These are typically declared in your controllers, and are interface elements that have a limited display (such as modals, popups, loaders). Just like Angular services, Ionic services all start with a `$` and are very clearly named like you see in this example.
+Services are programmatic user interface elements that are declared in JavaScript, and are provided using Angular's services architecture. These are typically used in your controllers, and provide interface elements that have a limited display time (such as modals, popups, loaders). Just like Angular services, Ionic services all start with a `$` and are very clearly named like you see in this example.
 
 ```javascript,linenums=true
 function Controller($scope, $ionicSlideBoxDelegate) {
@@ -300,7 +300,7 @@ Sadly, yet again, the screen is blank. Remember, the tabs view is `abstract` so 
 
 ## Add the services
 
-But wait! You will need some Angular services to help manage data for this app, and I don't want to spend a lot of time on them. You can look through the comments to see how they work, and should be familiar to Angular developers. The first is a simple service to help manage data in localStorage, and the second is a service to load stock quotes from Yahoo! Finance.
+But wait! You will need some Angular services to help manage data for this app, and I don't want to spend a lot of time on them. You can look through the comments to see how they work, and they should be familiar to Angular developers. The first is a simple service to help manage data in localStorage, and the second is a service to load stock quotes from Yahoo! Finance. If you are not familiar with Angular and creating services, it is best to take a moment and review the [Angular services documentation](https://docs.angularjs.org/guide/services).
 
 First create the file www/js/localstorage.js with the content in the code below. Be sure to add a script tag to index.html.
 
