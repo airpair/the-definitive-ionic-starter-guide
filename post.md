@@ -485,6 +485,7 @@ angular.module('App')
     if ($scope.form.query) {
       QuotesService.get([$scope.form.query]).then(function(results) {
         if (results[0].Name) {
+          symbols.push($scope.form.query);
           $scope.quotes.push(results[0]);
           $scope.form.query = '';
           updateSymbols();
