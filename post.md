@@ -446,7 +446,7 @@ angular.module('App')
 .controller('QuotesController', function($scope, $ionicPopup, $ionicLoading, LocalStorageService, QuotesService) {
 
   // Get symbols from localstorage, set default values
-  var symbols = LocalStorageService.get('quotes', ['YHOO', 'AAPL', 'GOOG', 'MSFT', 'FB', 'TWTR']);
+  $scope.symbols = LocalStorageService.get('quotes', ['YHOO', 'AAPL', 'GOOG', 'MSFT', 'FB', 'TWTR']);
   $scope.form = {
     query: ''
   };
@@ -458,7 +458,8 @@ angular.module('App')
     var symbols = [];
     angular.forEach($scope.quotes, function(stock) {
       symbols.push(stock.Symbol);
-    })
+    });
+    $scope.symbols = symbols;
     LocalStorageService.update('quotes', symbols);
   }
   // Method to handle reordering of items in the list
@@ -469,7 +470,7 @@ angular.module('App')
   };
   // Method to load quotes, or show an alert on error, and finally close the loader
   $scope.getQuotes = function() {
-    QuotesService.get(symbols).then(function(quotes) {
+    QuotesService.get($scope.symbols).then(function(quotes) {
       $scope.quotes = quotes;
     }, function(error) {
       $ionicPopup.alert({
@@ -485,7 +486,7 @@ angular.module('App')
     if ($scope.form.query) {
       QuotesService.get([$scope.form.query]).then(function(results) {
         if (results[0].Name) {
-          symbols.push($scope.form.query);
+          $scope.symbols.push($scope.form.query);
           $scope.quotes.push(results[0]);
           $scope.form.query = '';
           updateSymbols();
@@ -499,6 +500,7 @@ angular.module('App')
   };
   // Method to remove a quote from the list
   $scope.remove = function($index) {
+    $scope.symbols.splice($index, 1);
     $scope.quotes.splice($index, 1);
     updateSymbols();
   };
